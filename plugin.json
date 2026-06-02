@@ -1,0 +1,39 @@
+{
+  "name": "jc-plugin-sample",
+  "author": "Jeffrey Chen",
+  "url": "https://github.com/TCOTC/jc-plugin-sample",
+  "version": "1.0.0",
+  "minAppVersion": "3.6.5",
+  "backends": [
+    "windows",
+    "linux",
+    "darwin",
+    "ios",
+    "android",
+    "harmony",
+    "docker",
+    "all"
+  ],
+  "frontends": [
+    "desktop",
+    "mobile",
+    "browser-desktop",
+    "browser-mobile",
+    "desktop-window",
+    "all"
+  ],
+  "disabledInPublish": false,
+  "displayName": {
+    "default": "Plugin Name",
+    "zh_CN": "插件名称"
+  },
+  "description": {
+    "default": "Plugin Description",
+    "zh_CN": "插件描述"
+  },
+  "readme": {
+    "default": "README.md",
+    "zh_CN": "README_zh_CN.md"
+  },
+  "funding": { "custom": ["https://mytemos.com/"] }
+}
