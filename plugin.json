@@ -3,7 +3,7 @@
   "author": "Jeffrey Chen",
   "url": "https://github.com/TCOTC/jc-plugin-sample",
   "version": "1.0.0",
-  "minAppVersion": "3.7.0",
+  "minAppVersion": "3.8.3",
   "backends": [
     "windows",
     "linux",
@@ -35,5 +35,5 @@
     "default": "README.md",
     "zh-CN": "README.zh-CN.md"
   },
-  "funding": { "custom": ["https://mytemos.com/"] }
+  "funding": {"custom": ["https://mytemos.com/"]}
 }

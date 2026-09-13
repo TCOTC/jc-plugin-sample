@@ -3,6 +3,24 @@ const {EsbuildPlugin} = require("esbuild-loader");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const ZipPlugin = require("zip-webpack-plugin");
+const pluginManifest = require("./plugin.json");
+
+// 图标与预览图是可选的：plugin.json 里声明了就用声明的文件名，
+// 没声明才回退到包根目录的 icon.png / preview.png。
+// 注意两者的严格程度不同：
+//   - 已声明：该文件必须存在，缺失视为打包配置错误，构建应当失败
+//   - 未声明：遗留同名文件可有可无，缺失时静默跳过
+const packageImagePatterns = [
+    ["icon", "icon.png"],
+    ["preview", "preview.png"],
+].map(([field, legacyName]) => {
+    const declared = pluginManifest[field];
+    return {
+        from: declared || legacyName,
+        to: "./dist/",
+        noErrorOnMissing: !declared,
+    };
+});
 
 module.exports = (env, argv) => {
     const production = argv.mode === "production";
@@ -15,8 +33,7 @@ module.exports = (env, argv) => {
         plugins.push(
             new CopyPlugin({
                 patterns: [
-                    {from: "preview.png", to: "./dist/"},
-                    {from: "icon.png", to: "./dist/"},
+                    ...packageImagePatterns,
                     {from: "README*.md", to: "./dist/"},
                     {from: "plugin.json", to: "./dist/"},
                     {from: "src/i18n/", to: "./dist/i18n/"},
@@ -78,7 +95,7 @@ module.exports = (env, argv) => {
                         {
                             loader: "esbuild-loader",
                             options: {
-                                target: "es6",
+                                target: "es2020",
                             },
                         },
                     ],
